@@ -24,6 +24,8 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
+        <div class="pb-6 text-gray-900 dark:text-gray-100">Register a new staff member</div>
+
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="name" value="Name" />

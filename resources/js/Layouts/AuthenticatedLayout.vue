@@ -12,7 +12,7 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div class="min-h-screen bg-gradient-to-r from-green-400 to-blue-500 dark:bg-gradient-to-r dark:from-green-900 dark:to-blue-900">
             <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,12 +25,13 @@ const showingNavigationDropdown = ref(false);
                                         class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                     />
                                 </Link>
+                                <h1 class="pl-3">Henry's Outdoor Shop</h1>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Candidate Listing
                                 </NavLink>
                             </div>
                         </div>
@@ -65,6 +66,9 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('register')">
+                                            Register New Staff Member
+                                        </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>
@@ -113,7 +117,7 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            Candidate Listing
                         </ResponsiveNavLink>
                     </div>
 
@@ -131,6 +135,7 @@ const showingNavigationDropdown = ref(false);
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out
                             </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('register')"> Register New Staff Memeber </ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
