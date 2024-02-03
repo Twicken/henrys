@@ -25,7 +25,7 @@ const showingNavigationDropdown = ref(false);
                                         class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                     />
                                 </Link>
-                                <h1 class="pl-3">Henry's Outdoor Shop</h1>
+                                <h1 class="pl-3 text-gray-800 dark:text-gray-200">Henry's Outdoor Shop</h1>
                             </div>
 
                             <!-- Navigation Links -->
