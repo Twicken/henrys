@@ -45,8 +45,10 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        //Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+
+        //show message when redirecting. this is for admin user to see that they successfully created a new account.
+        return redirect(RouteServiceProvider::HOME)->with('success', 'New staff registered successfully.');
     }
 }
