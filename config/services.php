@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'referoo' => [
+            'client_id' => env('REFEROO_CLIENT_ID'),
+            'client_secret' => env('REFEROO_CLIENT_SECRET'),
+            'redirect_uri' => env('REFEROO_REDIRECT_URI'),
+    ]
+
 ];

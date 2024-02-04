@@ -66,9 +66,9 @@ const showingNavigationDropdown = ref(false);
 
                                     <template #content>
                                         <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                                        <DropdownLink :href="route('register')">
+                                        <!-- <DropdownLink :href="route('register')">
                                             Register New Staff Member
-                                        </DropdownLink>
+                                        </DropdownLink> -->
                                         <DropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out
                                         </DropdownLink>
@@ -135,7 +135,7 @@ const showingNavigationDropdown = ref(false);
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
                                 Log Out
                             </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('register')"> Register New Staff Memeber </ResponsiveNavLink>
+                            <!-- <ResponsiveNavLink :href="route('register')"> Register New Staff Memeber </ResponsiveNavLink> -->
                         </div>
                     </div>
                 </div>

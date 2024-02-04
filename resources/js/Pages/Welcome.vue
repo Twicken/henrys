@@ -29,10 +29,10 @@ defineProps({
                 </p>
             </div>
             <div class="rounded bg-white dark:bg-gray-800 p-8 shadow-lg">
-                <Link :href="route('login')"
+                <a :href="route('login')"
                     class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Login
-                </Link>
+            </a>
                 <!-- <Link v-if="canRegister" :href="route('register')"
                     class="mt-4 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Register
