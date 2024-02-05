@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "watch": "vite build --watch"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -18,6 +19,11 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
-        "@inertiajs/inertia": "^0.11.1"
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-vue3": "^0.6.0",
+        "date-fns": "^3.3.1",
+        "moment": "^2.30.1",
+        "vue-router": "^4.2.5",
+        "watch": "^1.0.2"
     }
 }

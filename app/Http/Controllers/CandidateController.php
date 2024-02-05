@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ReferooService;
-use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
@@ -14,12 +14,11 @@ class CandidateController extends Controller
         $this->referooService = $referooService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $candidates = $this->referooService->getCandidates();
-
-        return Inertia::render('Candidates/Index', [
-            'candidates' => $candidates['data'] ?? [],
-        ]);
+        $limit = $request->input('limit');
+        $offset = $request->input('offset');
+        $candidates = $this->referooService->getCandidates($limit, $offset);
+        return response()->json($candidates);
     }
 }

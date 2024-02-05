@@ -24,15 +24,17 @@ class Authenticate extends Middleware
         if ($referooService->hasAccessToken()) {
             $loggedInUser = $referooService->getLoggedInUser();
             $userEmail = $loggedInUser['email'];
-            $userName = $loggedInUser['first_name'].$loggedInUser['last_name'];
+            $userName = $loggedInUser['first_name']." ".$loggedInUser['last_name'];
             $user = User::where('email', $userEmail)->first();
 
             if (!$user) {
                 // If the user doesn't exist, create one, as our app's users are dictated by Referoo
+                $length = 16; // Length of the random string
+                $randomString = bin2hex(random_bytes($length));
                 $rawUser = [
                     'name' => $userName,
                     'email' => $userEmail,
-                    'password' => 'ThisisaRandomDefaultpassword212135!@#$',
+                    'password' => $randomString,
                 ];
             
                 // Validate the user data obtained from the API response
@@ -66,6 +68,6 @@ class Authenticate extends Middleware
         }
 
         // If the access token is not valid or does not exist
-        return $request->expectsJson() ? null : route('login');
+        return $request->expectsJson() ? null : route('/');
     }
 }

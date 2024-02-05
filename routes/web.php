@@ -66,18 +66,31 @@ Route::get('/referoo/redirect', function (ReferooService $referooService) {
 
 
 // This takes us to the candidate listing page if we have a referoo token.
-Route::get('/dashboard', function (ReferooService $referooService) {
+Route::get('/dashboard', function (Request $request, ReferooService $referooService) {
+    $offset = $request->input('offset', 0);
+    $limit = $request->input('limit', 25);
+    
     // If we have a token, fetch candidates
     if ($referooService->hasAccessToken()) {
-        $candidates = $referooService->getCandidates();
         return Inertia::render('Dashboard', [
             'flash' => ['success' => session('success')],
-            'candidates' => $candidates['data'] ?? [],
         ]);
     }
     // If we don't have a token, redirect to login. should add error here.
     return redirect()->route('/');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
+
+Route::get('/candidatedetails/{num}', function (Request $request, ReferooService $referooService, $num) {
+    $candidate = $referooService->getCandidateDetails($num); 
+    $refereeDetails = $referooService->getCandidateReferees($num); 
+    return Inertia::render('CandidateDetails', [
+        'candidate' => $candidate,
+        'refereedetails' => $refereeDetails ?? [],
+    ]);
+})->middleware(['auth', 'verified'])->name('candidate.details');
+
 
 Route::post('/logout', function (Request $request, ReferooService $referooService) {
     // Call the logout method on ReferooService to clear tokens

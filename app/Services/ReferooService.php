@@ -48,7 +48,7 @@ class ReferooService
     
         if ($response->successful()) {
             $tokenData = $response->json();
-            error_log("n\n\naccess token data: " . print_r($tokenData, true)."\n\n\n"); //remove
+            //error_log("n\n\naccess token data: " . print_r($tokenData, true)."\n\n\n"); //remove
             $this->storeTokens($tokenData);
         } else {
             // Log error details
@@ -66,7 +66,7 @@ class ReferooService
         return Cache::has('referoo_access_token');
     }
 
-    public function getCandidates($limit = 25, $archived = 0)
+    public function getCandidates($limit = 25, $offset = 0, $archived = 0)
     {
         $accessToken = $this->getAccessToken();
         
@@ -75,10 +75,11 @@ class ReferooService
             'Accept' => 'application/json',
         ])->get("{$this->baseUrl}/oauth2/candidates", [
             'limit' => $limit,
+            'offset' => $offset,
             'archived' => $archived,
         ]);
-        error_log("\n\n\ncandidtate data: " . print_r($response->json(), true)."\n\n\n"); //remove
-
+    
+        //error_log("\n\n\ncandidate data: " . print_r($response->json(), true)."\n\n\n"); //remove
         return $response->json();
     }
 
@@ -89,11 +90,22 @@ class ReferooService
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $accessToken,
             'Accept' => 'application/json',
-        ])->get("{$this->baseUrl}/oauth2/candidate", [
-            'num' => $num,
+        ])->get("{$this->baseUrl}/oauth2/candidate/{$num}", [
             'archived' => $archived,
         ]);
-        error_log("\n\n\nsingle candidtate data: " . print_r($response->json(), true)."\n\n\n"); //remove
+        return $response->json();
+    }
+
+    public function getCandidateReferees($num)
+    {
+        error_log("\n\n\nreferee data - getting\n\n\n"); //remove
+        $accessToken = $this->getAccessToken();
+        
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $accessToken,
+            'Accept' => 'application/json',
+        ])->get("{$this->baseUrl}/oauth2/candidate/{$num}/referees", []);
+        error_log("\n\n\nreferee data: " . print_r($response->json(), true)."\n\n\n"); //remove
         return $response->json();
     }
 
@@ -105,8 +117,6 @@ class ReferooService
             'Authorization' => 'Bearer ' . $accessToken,
             'Accept' => 'application/json',
         ])->get("{$this->baseUrl}/oauth2/me", []);
-        error_log("\n\n\nloggedInUser data: " . print_r($response->json(), true)."\n\n\n"); //remove
-
         return $response;
     }
 
@@ -116,7 +126,6 @@ class ReferooService
             Cache::put('referoo_access_token', $tokenData['access_token'], $tokenData['expires_in'] - 30);
             Cache::put('referoo_refresh_token', $tokenData['refresh_token'], now()->addYear());
         } else {
-            // Log error details
             Log::error('Invalid token data received', ['tokenData' => $tokenData]);
             throw new \Exception('Invalid token data received.');
         }
@@ -141,7 +150,8 @@ class ReferooService
         // Check if the refresh token exists
         if (!$refreshToken) {
             Log::error('Refresh token not found.');
-            throw new \Exception('Refresh token not found.');
+            header('Location: /');
+            //throw new \Exception('Refresh token not found.');
         }
     
         // Make the request to refresh the access token
@@ -175,8 +185,6 @@ class ReferooService
     public function logout()
     {
         // Remove the tokens from the cache
-        error_log("\n\n\nclearing tokens\n\n\n"); //remove
-
         Cache::forget('referoo_access_token');
         Cache::forget('referoo_refresh_token');
 
