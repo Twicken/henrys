@@ -1,3 +1,7 @@
+
+![Alt Text](https://raw.githubusercontent.com/Twicken/henrys/dev/public/images/demo.gif)
+
+
 Thank you for reviewing my Referoo Assessment App.
 
 I developed this on my local machine with Ubuntu.
