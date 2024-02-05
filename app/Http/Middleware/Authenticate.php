@@ -68,6 +68,6 @@ class Authenticate extends Middleware
         }
 
         // If the access token is not valid or does not exist
-        return $request->expectsJson() ? null : route('/');
+        return $request->expectsJson() ? null : route('login');
     }
 }
