@@ -105,7 +105,6 @@ export default {
             if (newCandidates.length > 0) {
               // Concatenate new candidates
               this.candidates = this.candidates.concat(newCandidates);
-              console.log(this.candidates);
 
               // Continue loading more candidates if there might be more
               if (newCandidates.length === this.itemsToLoad) {
@@ -120,7 +119,6 @@ export default {
             }
           })
           .catch((error) => {
-            console.error('Error fetching candidates:', error);
             this.loadingCandidates = false;
           });
       };
@@ -131,7 +129,6 @@ export default {
       this.currentPage = page;
     },
     viewDetails(candidateNum) {
-      console.log('Viewing details for candidate:', candidateNum);
       this.$emit("view-details", candidateNum);
 
     },

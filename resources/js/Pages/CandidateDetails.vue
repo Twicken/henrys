@@ -68,7 +68,7 @@ export default {
                                 <!-- Referee Details Table -->
                                 <div class="p-4">
                                     <h2 class="text-xl font-semibold">Referee Details</h2>
-                                    <table class="min-w-full bg-white mt-4">
+                                    <table v-if="refereeDetails && refereeDetails.length > 0" class="min-w-full bg-white mt-4">
                                         <thead class="bg-gray-800 text-white">
                                             <tr>
                                                 <!-- ...other headers... -->
@@ -108,6 +108,9 @@ export default {
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <div v-else>
+                                        <p>No referee data</p>
+                                    </div>
                                 </div>
 
                                 <div class="p-4">

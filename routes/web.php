@@ -41,14 +41,14 @@ Route::get('/', function (Request $request, ReferooService $referooService) {
     }
 
     if (!strlen($state) || !strlen($code) || $state !== $queryState) {
-        return redirect()->route('/')->with('error', 'Invalid state or authorization code.');
+        return redirect()->route('login')->with('error', 'Invalid state or authorization code.');
     }
     
     // Handle the authorization callback, exchange code for token
     try {
         $referooService->handleAuthorizationCallback($code);
     } catch (\Exception $e) {
-        return redirect()->route('/')->with('error', 'Error during token exchange: ' . $e->getMessage());
+        return redirect()->route('login')->with('error', 'Error during token exchange: ' . $e->getMessage());
     }
     
     return redirect()->to('/dashboard');
@@ -77,7 +77,7 @@ Route::get('/dashboard', function (Request $request, ReferooService $referooServ
         ]);
     }
     // If we don't have a token, redirect to login. should add error here.
-    return redirect()->route('/');
+    return redirect()->route('login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/candidates', [CandidateController::class, 'index'])->name('candidates.index');
