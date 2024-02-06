@@ -4,9 +4,9 @@
 
 Thank you for reviewing my Referoo Assessment App.
 
+This is a laravel breeze app with vue.js and inertia.
 I developed this on my local machine with Ubuntu.
 I setup an NGINX server and got some keys for SSL so the referoo auth redirect would hit https://localhost, you may have to setup something similar to get that working.
-This is a laravel breeze app with vue.js and inertia.
 
 There is a mock sqlite database that is stored in database/database.sqlite. This is for the native authentication of the laravel breeze app, which i modified to use the referoo login and token.
 
@@ -17,7 +17,7 @@ Please let me know if you need more detailed instructions on how to get this app
 I can put this in a docker container if that would be easier.
 I can potentially host it on aws too if that will save you time, but we would need to do something about the api sandbox redirecting to https://localhost
 
-My env file looks like this you will need to set it up to be the same, and add in the REFEROO_CLIENT_ID and REFEROO_CLIENT_SECRET.
+My env file looks like below. you will need to set it up to be the same, and add in the REFEROO_CLIENT_ID and REFEROO_CLIENT_SECRET.
 
 APP_NAME=Laravel
 APP_ENV=local
